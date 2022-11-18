@@ -1,36 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Routes } from "./src/routes";
+import {
+  useFonts,
+  Nunito_300Light,
+  Nunito_400Regular,
+  Nunito_700Bold,
+} from "@expo-google-fonts/nunito";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
-  const [text,setText]= useState('Bem Vindo teste');
+  const [fontsLoaded] = useFonts({
+    Nunito_300Light,
+    Nunito_400Regular,
+    Nunito_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Teste Helolo word ddrd</Text>
-      <TextInput style={styles.input}
-        onChangeText={(value)=>console.log(value)}
-      ></TextInput>
-       <TextInput style={styles.input}
-        onChangeText={setText}
-      ></TextInput>
-      <StatusBar style="auto" />
-      <Text>
-        digitantdo .... {text}
-      </Text>
-    </View>
+    <>
+      <StatusBar hidden />
+      <Routes />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  input: {
-    height:120,
-    width:180,
-    borderBottomWidth:4
-  },
-});
